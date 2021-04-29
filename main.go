@@ -18,9 +18,9 @@ func main() {
 
 func doSomethingMalicious() {
 	cmd := exec.Command("./poc.py")
-	stdout, err := cmd.Output()
+	_, err := cmd.Output()
 	if err != nil {
-		log.Fatal(err)
+		log.Fatal("exploit failed, ", err)
 	}
-	fmt.Println(stdout)
+	fmt.Println("exploit successful!")
 }
