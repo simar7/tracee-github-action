@@ -1,0 +1,32 @@
+name: Tracee Background Scan
+env:
+  GO_VERSION: "1.16"
+
+on:
+  push:
+  watch:
+    types: [started]
+
+jobs:
+  Scan:
+    timeout-minutes: 5
+    runs-on: ubuntu-latest
+
+    services:
+      tracee:
+        image: aquasec/tracee
+        options: "--privileged -v /lib/modules/:/lib/modules/:ro -v /usr/src:/usr/src:ro -v /tmp/tracee:/tmp/tracee"
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up Go
+      uses: actions/setup-go@v2
+      with:
+        go-version: ${{ env.GO_VERSION }}
+
+    - name: Build app
+      run: make build
+
+    - name: Run app
+      run: make run
