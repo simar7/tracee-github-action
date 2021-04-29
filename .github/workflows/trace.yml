@@ -30,3 +30,7 @@ jobs:
 
     - name: Run app
       run: make run
+
+    - name: Show Tracee logs
+      run: |
+        docker logs "${{ job.services.tracee.id }}"
