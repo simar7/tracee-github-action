@@ -44,5 +44,7 @@ jobs:
 
     - name: Show Tracee Profiler logs
       run: |
-        docker logs tracee-profiler
+        echo ">>> Tracee logs"
+        cat tracee.stdout.log
+        echo ">>> New profile"
         cat tracee.profile.new
