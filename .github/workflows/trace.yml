@@ -44,7 +44,9 @@ jobs:
     - name: Stop Tracee profiling
       run: |
         docker kill --signal="SIGINT" tracee-profiler
+        sleep 2
 
     - name: Show Tracee Profiler logs
       run: |
+        ls -lrRth /tmp/tracee
         cat /tmp/tracee/tracee.profile.out
