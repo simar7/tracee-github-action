@@ -44,4 +44,5 @@ jobs:
 
     - name: Show Tracee Profiler logs
       run: |
+        docker logs tracee-profiler
         cat tracee.profile.new
