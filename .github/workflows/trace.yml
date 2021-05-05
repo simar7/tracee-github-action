@@ -46,4 +46,6 @@ jobs:
     - name: Show Tracee Profiler logs
       run: |
         echo ">>>> new profile"
+        ls -lRrth /tmp
+        pwd
         cat tracee.profile.new
