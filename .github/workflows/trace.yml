@@ -52,7 +52,12 @@ jobs:
 
     - name: Show Tracee Profiler logs
       run: |
+        echo "TRACEE PROFILER LOGS"
         cat tracee.profiler.out
+        echo -e "\n\nKNOWN GOOD RUN"
+        cat tracee.profile.old
+        echo -e "\n\nCURRENT RUN"
+        cat tracee.profile.new
 
     - uses: actions/upload-artifact@v2
       with:
