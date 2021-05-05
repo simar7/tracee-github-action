@@ -38,6 +38,7 @@ jobs:
         --capture exec --profile \
         --compare-profile-path="/tmp/tracee/tracee.profile.old" \
         --save-profile-path="/tmp/tracee/tracee.profile.new" \
+        --profiler-output="/tmp/tracee/tracee.profiler.out" \
         --fail-on-diff &
 
     - name: Run app
@@ -46,11 +47,12 @@ jobs:
 
     - name: Stop Tracee profiling
       run: |
-        docker attach tracee-profiler
         docker kill --signal="SIGINT" tracee-profiler
         docker wait tracee-profiler
 
     - name: Show Tracee Profiler logs
       run: |
+        echo ">>> Tracee profiler out"
+        cat tracee.profiler.out
         echo ">>> New profile"
         cat tracee.profile.new
