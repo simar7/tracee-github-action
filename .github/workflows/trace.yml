@@ -52,7 +52,9 @@ jobs:
 
     - name: Show Tracee Profiler logs
       run: |
-        echo ">>> Tracee profiler out"
         cat tracee.profiler.out
-        echo ">>> New profile"
-        cat tracee.profile.new
+
+    - uses: actions/upload-artifact@v2
+      with:
+        name: Upload profiler artifacts
+        path: tracee.profile*
