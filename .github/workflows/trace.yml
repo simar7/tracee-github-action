@@ -31,8 +31,7 @@ jobs:
     - name: Start Tracee profiling in background
       run: |
         docker pull simar7/tracee-ebpf:profiler
-        docker run --name tracee-profiler --rm --privileged -v /proc:/proc -v /boot:/boot -v /lib/modules/:/lib/modules/:ro -v /usr/src:/usr/src:ro -v $(pwd):/tmp/tracee simar7/tracee-ebpf:profiler --output out-file:"/tmp/tracee/tracee.stdout.log" --capture exec --profile --save-profile-path="/tmp/tracee/tracee.profile.new" &
-#        docker run --name tracee-profiler --rm --privileged -v /proc:/proc -v /boot:/boot -v /lib/modules/:/lib/modules/:ro -v /usr/src:/usr/src:ro -v /tmp/tracee:/tmp/tracee simar7/tracee-ebpf:profiler --output out-file:"/tmp/tracee/tracee.stdout.log" --capture exec --profile --compare-profile-path="tracee.profile.old" --save-profile-path="tracee.profile.new" --fail-on-diff &
+        docker run --name tracee-profiler --rm --privileged -v /proc:/proc -v /boot:/boot -v /lib/modules/:/lib/modules/:ro -v /usr/src:/usr/src:ro -v /tmp/tracee:/tmp/tracee simar7/tracee-ebpf:profiler --output out-file:"/tmp/tracee/tracee.stdout.log" --capture exec --profile --compare-profile-path="tracee.profile.old" --save-profile-path="tracee.profile.new" --fail-on-diff &
 
     - name: Run app
       run: |
@@ -45,5 +44,4 @@ jobs:
 
     - name: Show Tracee Profiler logs
       run: |
-        echo ">>>> new profile"
         cat tracee.profile.new
