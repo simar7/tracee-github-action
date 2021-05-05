@@ -9,7 +9,7 @@ import (
 
 func main() {
 	fmt.Println("Hello Tracee!")
-	for i := 0; i < 30; i++ { // Need to wait until Tracee is ready
+	for i := 0; i < 10; i++ { // Need to wait until Tracee is ready
 		fmt.Printf("Tick %d\n", i)
 		time.Sleep(time.Second)
 	}
