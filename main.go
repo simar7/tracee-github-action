@@ -13,7 +13,7 @@ func main() {
 		fmt.Printf("Tick %d\n", i)
 		time.Sleep(time.Second)
 	}
-	doSomethingMalicious()
+	//doSomethingMalicious()
 }
 
 func doSomethingMalicious() {

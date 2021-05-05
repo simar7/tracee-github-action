@@ -12,13 +12,10 @@ jobs:
     timeout-minutes: 5
     runs-on: ubuntu-latest
 
-    services:
-      tracee:
-        image: simar7/tracee-ebpf:profiler
-#        image: aquasec/tracee:latest
-        options: "--name tracee-profiler --privileged -v /proc:/proc -v /boot:/boot -v /lib/modules/:/lib/modules/:ro -v /usr/src:/usr/src:ro -v /tmp/tracee:/tmp/tracee"
-#        volumes:
-#        - /tmp/tracee:/tmp/tracee
+#    services:
+#      tracee:
+#        image: simar7/tracee-ebpf:profiler
+#        options: "--name tracee-profiler --privileged -v /proc:/proc -v /boot:/boot -v /lib/modules/:/lib/modules/:ro -v /usr/src:/usr/src:ro -v /tmp/tracee:/tmp/tracee"
 
     steps:
     - uses: actions/checkout@v2
@@ -31,11 +28,12 @@ jobs:
     - name: Build app
       run: make build
 
-#    - name: Start Tracee profiling in background
-#      run: |
-#        mkdir /tmp/tracee
-#        docker pull simar7/tracee-ebpf:profiler
-#        docker run --name tracee-profiler --rm --privileged -v /proc:/proc -v /boot:/boot -v /lib/modules/:/lib/modules/:ro -v /usr/src:/usr/src:ro -v /tmp/tracee:/tmp/tracee simar7/tracee-ebpf:profiler &
+    - name: Start Tracee profiling in background
+      run: |
+        mkdir /tmp/tracee
+        docker pull simar7/tracee-ebpf:profiler
+        docker run --name tracee-profiler --rm --privileged -v /proc:/proc -v /boot:/boot -v /lib/modules/:/lib/modules/:ro -v /usr/src:/usr/src:ro -v /tmp/tracee:/tmp/tracee simar7/tracee-ebpf:profiler --output out-file:"/tmp/tracee/tracee.stdout.log" --capture exec --profile --save-profile-path="tracee.profile.new" &
+#        docker run --name tracee-profiler --rm --privileged -v /proc:/proc -v /boot:/boot -v /lib/modules/:/lib/modules/:ro -v /usr/src:/usr/src:ro -v /tmp/tracee:/tmp/tracee simar7/tracee-ebpf:profiler --output out-file:"/tmp/tracee/tracee.stdout.log" --capture exec --profile --compare-profile-path="tracee.profile.old" --save-profile-path="tracee.profile.new" --fail-on-diff &
 
     - name: Run app
       run: |
@@ -48,4 +46,5 @@ jobs:
 
     - name: Show Tracee Profiler logs
       run: |
-        cat /tmp/tracee/tracee.profile.out
+        echo ">>>> new profile"
+        cat tracee.profile.new
