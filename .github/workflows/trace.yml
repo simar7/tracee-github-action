@@ -39,7 +39,7 @@ jobs:
         --compare-profile-path="/tmp/tracee/tracee.profile.old" \
         --save-profile-path="/tmp/tracee/tracee.profile.new" \
         --profiler-output="/tmp/tracee/tracee.profiler.out" \
-        --fail-on-diff &
+        --fail-on-diff=true &
 
     - name: Run app
       run: |
@@ -56,5 +56,5 @@ jobs:
 
     - uses: actions/upload-artifact@v2
       with:
-        name: Upload profiler artifacts
+        name: Profiler Reports
         path: tracee.profile*
