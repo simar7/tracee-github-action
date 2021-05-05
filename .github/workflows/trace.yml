@@ -47,5 +47,4 @@ jobs:
 
     - name: Show Tracee Profiler logs
       run: |
-        ls -lrRth /tmp/tracee
-        cat /tmp/tracee/tracee.stdout.log
+        cat /tmp/tracee/tracee.profile.out
