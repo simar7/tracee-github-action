@@ -12,11 +12,11 @@ jobs:
     timeout-minutes: 5
     runs-on: ubuntu-latest
 
-#    services:
-#      tracee:
-#        image: simar7/tracee-ebpf:profiler
+    services:
+      tracee:
+        image: simar7/tracee-ebpf:profiler
 #        image: aquasec/tracee:latest
-#        options: "--name tracee-profiler --privileged -v /proc:/proc -v /boot:/boot -v /lib/modules/:/lib/modules/:ro -v /usr/src:/usr/src:ro -v /tmp/tracee:/tmp/tracee"
+        options: "--name tracee-profiler --privileged -v /proc:/proc -v /boot:/boot -v /lib/modules/:/lib/modules/:ro -v /usr/src:/usr/src:ro -v /tmp/tracee:/tmp/tracee"
 #        volumes:
 #        - /tmp/tracee:/tmp/tracee
 
@@ -31,11 +31,11 @@ jobs:
     - name: Build app
       run: make build
 
-    - name: Start Tracee profiling in background
-      run: |
-        mkdir /tmp/tracee
-        docker pull simar7/tracee-ebpf:profiler
-        docker run --name tracee-profiler --rm --privileged -v /proc:/proc -v /boot:/boot -v /lib/modules/:/lib/modules/:ro -v /usr/src:/usr/src:ro -v /tmp/tracee:/tmp/tracee simar7/tracee-ebpf:profiler &
+#    - name: Start Tracee profiling in background
+#      run: |
+#        mkdir /tmp/tracee
+#        docker pull simar7/tracee-ebpf:profiler
+#        docker run --name tracee-profiler --rm --privileged -v /proc:/proc -v /boot:/boot -v /lib/modules/:/lib/modules/:ro -v /usr/src:/usr/src:ro -v /tmp/tracee:/tmp/tracee simar7/tracee-ebpf:profiler &
 
     - name: Run app
       run: |
